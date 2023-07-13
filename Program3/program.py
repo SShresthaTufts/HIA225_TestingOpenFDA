@@ -1,6 +1,6 @@
 import mpld3
 import requests
-import plotly.graph_objects as go
+import matplotlib.pyplot as plt
 from datetime import datetime
 
 def GraphPatientReaction(reaction="fatigue", start="20200101", end="20201231"):
@@ -23,12 +23,10 @@ def GraphPatientReaction(reaction="fatigue", start="20200101", end="20201231"):
 
             # Create a trendline graph
             fig, ax = plt.subplots()
-
             ax.plot(time, count)
             ax.set_xlabel('Time')
             ax.set_ylabel('Count')
             ax.set_title(f"Adverse Reaction Trendline: {reaction} between {start} to {end}")
-           
             fig.show()
             
             mpld3.save_html(fig, 'fig.html')
