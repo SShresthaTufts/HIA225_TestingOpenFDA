@@ -1,5 +1,5 @@
 import requests
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 from datetime import datetime
 
 def GraphPatientReaction(reaction="fatigue", start="20200101", end="20201231"):
@@ -21,15 +21,14 @@ def GraphPatientReaction(reaction="fatigue", start="20200101", end="20201231"):
             time = [datetime.strptime(date, "%Y%m%d") for date in time]
 
             # Create a trendline graph
-            fig, ax = plt.subplots()
-            ax.plot(time, count)
-            ax.xlabel("Time")
-            ax.ylabel("Count")
-            ax.title("Adverse Reaction Trendline")
-            ax.xticks(rotation=45)
-            ax.tight_layout()
-            ax.show()
+            fig = go.Figure(data=go.Scatter(x=time, y=count))
+            fig.update_layout(
+              xaxis_title="Time",
+              yaxis_title="Count",
+              title=f"Adverse Reaction Trendline: {reaction} between {start} to {end}"
+            )
+            fig.write_html("fig.html")
         else:
-            print("No adverse reaction reports found.")
+          print("No adverse reaction reports found.")
     else:
         print(f"An error occurred: {response.status_code}")
