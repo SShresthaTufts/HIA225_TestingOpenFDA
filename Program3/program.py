@@ -28,7 +28,7 @@ def GraphPatientReaction(reaction="fatigue", start="20200101", end="20201231"):
             ax.set_ylabel('Count')
             ax.set_title(f"Adverse Reaction Trendline: {reaction} between {start} to {end}")
             fig.show()
-            
+
             mpld3.save_html(fig, 'fig.html')
         else:
           print("No adverse reaction reports found.")
